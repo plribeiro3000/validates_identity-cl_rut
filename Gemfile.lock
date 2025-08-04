@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validates_identity-cl_rut (0.1.0)
+    validates_identity-cl_rut (1.0.0)
       activemodel
       validates_identity (>= 0.5.0)
 
