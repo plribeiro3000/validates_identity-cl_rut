@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe ValidatesIdentity::ClRut::Validator do
-  it 'accepts 760864285' do
-    expect(described_class.new('760864285')).to be_valid
+  it 'accepts 27402089-k' do
+    expect(described_class.new('27402089-k')).to be_valid
   end
 
   it 'accepts 76086428-5' do
