@@ -3,7 +3,7 @@
 class ValidatesIdentity
   module ClRut
     class Validator
-      VALIDATION_REGULAR_EXPRESSION = /^(\d{2})\.?(\d{3})\.?(\d{3})-?(\d{1}|K)$/.freeze
+      VALIDATION_REGULAR_EXPRESSION = /^(\d{2})\.?(\d{3})\.?(\d{3})-?(\d{1}|K|k)$/.freeze
 
       attr_reader :value
 
@@ -21,7 +21,7 @@ class ValidatesIdentity
       def formatted
         return if result.nil?
 
-        "#{result[1]}.#{result[2]}.#{result[3]}-#{result[4]}"
+        "#{result[1]}.#{result[2]}.#{result[3]}-#{result[4].upcase}"
       end
 
       private
@@ -37,7 +37,7 @@ class ValidatesIdentity
       end
 
       def verifier_digit
-        result[4].to_s
+        result[4].to_s.upcase
       end
 
       def calculated_verifier_digit
