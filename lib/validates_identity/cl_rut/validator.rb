@@ -3,7 +3,7 @@
 class ValidatesIdentity
   module ClRut
     class Validator
-      VALIDATION_REGULAR_EXPRESSION = /^(\d{2})\.?(\d{3})\.?(\d{3})-?(\d{1}|K)$/.freeze
+      VALIDATION_REGULAR_EXPRESSION = /^(\d{1,2})\.?(\d{3})\.?(\d{3})-?(\d{1}|K|k)$/.freeze
 
       attr_reader :value
 
@@ -21,7 +21,7 @@ class ValidatesIdentity
       def formatted
         return if result.nil?
 
-        "#{result[1]}.#{result[2]}.#{result[3]}-#{result[4]}"
+        "#{result[1]}.#{result[2]}.#{result[3]}-#{result[4].upcase}"
       end
 
       private
@@ -37,11 +37,12 @@ class ValidatesIdentity
       end
 
       def verifier_digit
-        result[4].to_s
+        result[4].to_s.upcase
       end
 
       def calculated_verifier_digit
-        sum = multiply_and_sum([3, 2, 7, 6, 5, 4, 3, 2], number)
+        multipliers = (0...number.length).map { |i| [2, 3, 4, 5, 6, 7][i % 6] }.reverse
+        sum = multiply_and_sum(multipliers, number)
         rest = sum % 11
         difference = 11 - rest
 
