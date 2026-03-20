@@ -39,6 +39,22 @@ RSpec.describe ValidatesIdentity::ClRut::Validator do
     expect(described_class.new('12.531.909-2')).to be_valid
   end
 
+  it 'accepts 85490923' do
+    expect(described_class.new('85490923')).to be_valid
+  end
+
+  it 'accepts 8549092-3' do
+    expect(described_class.new('8549092-3')).to be_valid
+  end
+
+  it 'accepts 8.549.092-3' do
+    expect(described_class.new('8.549.092-3')).to be_valid
+  end
+
+  it 'rejects 8549092-1' do
+    expect(described_class.new('8549092-1')).not_to be_valid
+  end
+
   it 'rejects 10601313494' do
     expect(described_class.new('10601313494')).not_to be_valid
   end
